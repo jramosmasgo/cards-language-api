@@ -11,11 +11,11 @@ export const getOneUser = async (userId: string): Promise<IUser> => {
   }
 };
 
-export const getOneUserByField = async (params: object): Promise<IUser> => {
+export const getOneUserByField = async (
+  params: Partial<IUser>
+): Promise<IUser | null> => {
   try {
-    const userfound = await userModel.findOne(params);
-    if (!userfound) throw new Error("user not found");
-    return userfound;
+    return await userModel.findOne(params);
   } catch (error: any) {
     throw new Error(error.message);
   }
@@ -32,15 +32,11 @@ export const createUser = async (user: IUser): Promise<IUser> => {
 export const updateUser = async (
   newUserData: Partial<IUser>,
   userId: string
-): Promise<IUser> => {
+): Promise<IUser | null> => {
   try {
-    const modifiedUser = await userModel.findByIdAndUpdate(
-      userId,
-      newUserData,
-      { new: true }
-    );
-    if (!modifiedUser) throw new Error("User not found");
-    return modifiedUser;
+    return await userModel.findByIdAndUpdate(userId, newUserData, {
+      new: true,
+    });
   } catch (error: any) {
     throw new Error(error.message);
   }

@@ -18,6 +18,9 @@ const userSchema = new Schema<IUser>(
     profileImageUrl: {
       type: String,
     },
+    language: {
+      type: String,
+    },
   },
   {
     timestamps: true,
