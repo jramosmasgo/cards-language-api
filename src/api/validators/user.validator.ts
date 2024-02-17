@@ -12,7 +12,7 @@ export const createUserValidator = yup.object({
 
 export const getUserValidator = yup.object({
   params: yup.object({
-    idUser: yup.string().max(12).required(),
+    userId: yup.string().min(20).max(30).required(),
   }),
 });
 
@@ -25,6 +25,13 @@ export const updateUserValidator = yup.object({
     profileImageUrl: yup.string().url(),
   }),
   params: yup.object({
-    idUser: yup.string().max(12).required(),
+    userId: yup.string().min(12).required(),
   }),
 });
+
+export const loginUserValidator = yup.object({
+  body: yup.object({
+    email: yup.string().email().required(),
+    firebaseId: yup.string().required().min(7).max(12)
+  })
+})
