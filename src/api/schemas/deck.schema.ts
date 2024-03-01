@@ -3,8 +3,8 @@ import { Schema, Types, model } from "mongoose";
 
 const deckSchema = new Schema<IDeck>(
   {
-    user: {
-      type: Types.ObjectId,
+    userId: {
+      type: Schema.Types.ObjectId,
       ref: "users",
     },
     title: {
@@ -17,7 +17,7 @@ const deckSchema = new Schema<IDeck>(
     description: {
       type: String,
     },
-    madeIn: {
+    toLearn: {
       type: String,
     },
     madeFor: {

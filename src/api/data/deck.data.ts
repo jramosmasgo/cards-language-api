@@ -1,15 +1,16 @@
+import { ApplicationError } from "@core/error";
 import { IDeck } from "@interfaces/index";
 import { deckModel } from "@schemas/deck.schema";
 
-export const createDeck = async (deck: IDeck): Promise<IDeck> => {
+export const createDeckData = async (deck: IDeck): Promise<IDeck> => {
   try {
     return await deckModel.create(deck);
   } catch (error: any) {
-    throw new Error(error.message);
+    throw new ApplicationError(500, error.message);
   }
 };
 
-export const updateDeck = async (
+export const updateDeckData = async (
   newDeckData: Partial<IDeck>,
   deckId: string
 ): Promise<IDeck> => {
@@ -22,21 +23,21 @@ export const updateDeck = async (
     if (!modifiedDeck) throw new Error("deck not found");
     return modifiedDeck;
   } catch (error: any) {
-    throw new Error(error.message);
+    throw new ApplicationError(500, error.message);
   }
 };
 
-export const findDecksByField = async (
+export const findDecksByFieldData = async (
   fields: Partial<IDeck>
 ): Promise<IDeck[]> => {
   try {
     return await deckModel.find({ fields });
   } catch (error: any) {
-    throw new Error(error.message);
+    throw new ApplicationError(500, error.message)
   }
 };
 
-export const findOneDeckByField = async (
+export const findOneDeckByFieldData = async (
   field: Partial<IDeck>
 ): Promise<IDeck> => {
   try {
@@ -44,6 +45,6 @@ export const findOneDeckByField = async (
     if (!deckfound) throw new Error("Deck not found");
     return deckfound;
   } catch (error: any) {
-    throw new Error(error.message);
+    throw new ApplicationError(500, error.message)
   }
 };
